@@ -38,6 +38,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(flash());
 app.use((req,res,next)=>{
     res.locals.success_msg= req.flash('sucess_msg');
@@ -604,10 +605,10 @@ app.get('/posts',requireLogin,(req,res)=>{
     Post.find({status:'public'})
     .populate('postUser')
     .sort({date:'desc'})
-    .then((posts)=>{
+    .then((post)=>{ 
         res.render('post/posts',{
             title:'Posts',
-            posts:posts
+            post:post
         })
     })
     
